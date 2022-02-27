@@ -12,7 +12,12 @@ CKnave = Symbol("C is a Knave")
 # Puzzle 0
 # A says "I am both a knight and a knave."
 knowledge0 = And(
-    # TODO
+    # A is either a Knight or a Knave, not both.
+    Or(AKnight, AKnave), Not(And(AKnight, AKnave))
+    , 
+    # A says "I am both a knight and a knave."
+    # If and only if I am a Knight, then I am both a Knight and a Knave.
+    Biconditional(AKnight, And(AKnight, AKnave))
 )
 
 # Puzzle 1
@@ -43,9 +48,9 @@ def main():
     symbols = [AKnight, AKnave, BKnight, BKnave, CKnight, CKnave]
     puzzles = [
         ("Puzzle 0", knowledge0),
-        ("Puzzle 1", knowledge1),
-        ("Puzzle 2", knowledge2),
-        ("Puzzle 3", knowledge3)
+        # ("Puzzle 1", knowledge1),
+        # ("Puzzle 2", knowledge2),
+        # ("Puzzle 3", knowledge3)
     ]
     for puzzle, knowledge in puzzles:
         print(puzzle)
