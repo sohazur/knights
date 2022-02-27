@@ -24,7 +24,12 @@ knowledge0 = And(
 # A says "We are both knaves."
 # B says nothing.
 knowledge1 = And(
-    # TODO
+    # Both A and B are either Knight or Knave, not both.
+    And(Or(AKnight, AKnave), Not(And(AKnight, AKnave)), Or(BKnight, BKnave), Not(And(BKnight, BKnave)))
+    , 
+    # A says "We are both knaves."
+    # B says nothing.
+    Biconditional(AKnight, And(AKnave, BKnave))
 )
 
 # Puzzle 2
@@ -48,7 +53,7 @@ def main():
     symbols = [AKnight, AKnave, BKnight, BKnave, CKnight, CKnave]
     puzzles = [
         ("Puzzle 0", knowledge0),
-        # ("Puzzle 1", knowledge1),
+        ("Puzzle 1", knowledge1),
         # ("Puzzle 2", knowledge2),
         # ("Puzzle 3", knowledge3)
     ]
